@@ -251,7 +251,11 @@ mark{background:var(--warn-soft);color:inherit;border-radius:3px;padding:0 2px;b
         <span class="big" id="milDay">–</span><span class="muted" id="milTxt"></span>
       </div>
       <div class="bar"><i id="milBar" style="width:0"></i></div>
-      <p class="note">Empieza el <span class="mono">09/10/2026</span>. Duración a confirmar con el veterinario (la guía LeishVet habla de 4 semanas; el contador usa los 45 días previstos). Sustituye a la miltefosina, que se cortó el <span class="mono">08/10/2026</span> en el día 14 de 28.</p>
+      <p class="note">Primera inyección el <span class="mono">09/10/2026</span> a las 17:00. 45 días: última inyección el <span class="mono">22/11/2026</span>. Sustituye a la miltefosina, que se cortó el <span class="mono">08/10/2026</span> en el día 14 de 28.</p>
+      <ul class="plain">
+        <li><span class="when"><b>Alopurinol</b>6 meses</span><span>¾ de pastilla, desde el 09/10/2026 hasta ≈ 09/04/2027. Vigilar cristales en orina; dieta baja en purinas.</span></li>
+        <li><span class="when"><b>Leistab</b>diario</span><span>1 y ½ pastilla al día.</span></li>
+      </ul>
     </div>
     <div class="card">
       <div class="eyebrow">Ojo derecho · desde el 07/10/2026</div>
@@ -277,7 +281,7 @@ mark{background:var(--warn-soft);color:inherit;border-radius:3px;padding:0 2px;b
     <div class="card">
       <div class="eyebrow">Problemas activos</div>
       <ul class="plain">
-        <li><span class="tag" style="--cat:var(--c-leish)">Leish</span><span>Leishmaniosis con serología siempre ≥1/640 (el laboratorio no diluye más). Miltefosina cortada; empieza Glucantime el 09/10/2026.</span></li>
+        <li><span class="tag" style="--cat:var(--c-leish)">Leish</span><span>Leishmaniosis con serología siempre ≥1/640 (el laboratorio no diluye más). Miltefosina cortada. Desde el 09/10/2026: Glucantime 45 días + alopurinol 6 meses + Leistab.</span></li>
         <li><span class="tag" style="--cat:var(--c-ojo)">Ojo</span><span>Uveítis crónica, episcleritis, queratitis y edema de córnea en el ojo derecho. Todavía ve. Pronóstico visual reservado.</span></li>
         <li><span class="tag" style="--cat:var(--c-rinon)">Riñón</span><span>SDMA algo alto (09/2026). UPC alto en el pasado, pero siempre con orina infectada. Infecciones de orina repetidas.</span></li>
         <li><span class="tag" style="--cat:var(--c-artic)">Artic.</span><span>Artrosis en rodillas y cadera, cojeras que cambian de pata desde 2020. Gabapentina y Previcox si hay dolor.</span></li>
@@ -316,6 +320,7 @@ mark{background:var(--warn-soft);color:inherit;border-radius:3px;padding:0 2px;b
       <span><i style="background:var(--c-leish)"></i>Ciclo de miltefosina</span>
       <span><i style="background:var(--c-boca)"></i>Glucantime</span>
       <span><i style="background:var(--c-rinon)"></i>Alopurinol / domperidona</span>
+      <span><i style="background:var(--c-artic)"></i>Leistab</span>
       <span><i style="background:var(--c-ojo);opacity:.6"></i>Problema del ojo</span>
       <span><i style="background:var(--ink);height:8px;width:8px;border-radius:50%"></i>Serología (todas ≥1/640; el lab no diluye más)</span>
     </div>
@@ -432,10 +437,10 @@ mark{background:var(--warn-soft);color:inherit;border-radius:3px;padding:0 2px;b
     <div class="card">
       <div class="eyebrow">Preguntas para la próxima consulta</div>
       <ol class="qs">
-        <li><b>Antes del Glucantime:</b> ¿analítica de riñón y orina? ¿Cada cuánto controles durante el ciclo?</li>
-        <li><b>¿Cuántos días de Glucantime?</b> La guía habla de 4 semanas; vosotros teníais en mente 45.</li>
+        <li><b>Controles durante el Glucantime:</b> además de la orina del 24/10, ¿cuándo analítica de sangre (riñón)?</li>
         <li><b>¿En qué estadio LeishVet está?</b> Con creatinina, SDMA, proteinograma y UPC actuales.</li>
-        <li><b>¿Alopurinol junto al Glucantime?</b> Lo último registrado es 2025, y tiene historia de cristales en orina.</li>
+        <li><b>Alopurinol y riñón:</b> ¿hace falta ajustar la dosis si el SDMA sigue alto? ¿Dieta baja en purinas?</li>
+        <li><b>Leistab:</b> ¿qué lleva y para qué se lo damos? ¿Hasta cuándo?</li>
         <li><b>¿Repetimos UPC con orina limpia?</b> Todos los UPC altos han coincidido con infección.</li>
         <li><b>¿Pedimos la titulación completa de la IFI?</b> Una línea base antes del Glucantime permitiría ver si baja después.</li>
         <li><b>Previcox con el riñón:</b> ¿es seguro con el SDMA alto?</li>
@@ -453,7 +458,7 @@ mark{background:var(--warn-soft);color:inherit;border-radius:3px;padding:0 2px;b
         <li><span class="mono when">Serología</span><span>La ficha pone el positivo el 28/09/2026; el boletín está firmado el 22/09/2026. Es el mismo resultado.</span></li>
         <li><span class="mono when">Cojera</span><span>“EAO” el 27/01/2021: abreviatura poco clara (¿EAD?).</span></li>
         <li><span class="mono when">Analítica</span><span>Faltan los valores del perfil geriátrico y proteinograma de 09/2026.</span></li>
-        <li><span class="mono when">Dosis</span><span>Ningún informe da dosis de gabapentina, miltefosina ni alopurinol.</span></li>
+        <li><span class="mono when">Dosis</span><span>Ningún informe da dosis de gabapentina ni de la miltefosina. Glucantime: dosis por apuntar.</span></li>
         <li><span class="mono when">Miltefosina</span><span>Ciclo cortado el 08/10/2026 en el día 14 de 28.</span></li>
       </ul>
     </div>
@@ -530,28 +535,29 @@ const EV=[
 ["2026-10-03",["gen"],"Adopción","Fecha aproximada (4 días antes de oftalmología).",1],
 ["2026-10-07",["gen"],"Pesa 26,4 kg","",1],
 ["2026-10-08",["leish"],"Se corta la miltefosina","Día 14 de 28. Se cambia a Glucantime.",1],
-["2026-10-09",["leish"],"Empieza Glucantime (antimoniato de meglumina)","Inyectable. Duración a confirmar (se habla de 45 días).",1],
+["2026-10-09",["leish"],"Empieza Glucantime (antimoniato de meglumina)","Primera inyección a las 17:00. 45 días, hasta el 22/11/2026.",1],
+["2026-10-09",["leish","rinon"],"Empieza alopurinol (6 meses) y Leistab","Alopurinol ¾ de pastilla hasta ≈ 09/04/2027. Leistab 1 y ½ al día. Muestra de orina en 15 días.",1],
 ["2026-10-07",["ojo"],"Oftalmología: uveítis crónica del ojo derecho","Todavía ve. Episcleritis, queratitis y edema de córnea en ojo dcho.; esclerosis nuclear (de la edad) en el izquierdo. Presión ocular 10 dcho. / 19 izq. Lágrima 17 / 20. Pred-forte y ODM5 a las 9, 15, 21 y 3 h; Farline a las 9 y 21 h. Revisión en 15 días; ecografía ocular pendiente.",1]
 ];
 
 const UPCOMING=[
- ["2026-10-09","Primera inyección de Glucantime"],
+ ["2026-10-24","Llevar muestra de orina al veterinario"],
  ["2026-10-22","Revisión de oftalmología (15 días)"],
- ["2026-11-22","≈ Fin de Glucantime si son 45 días"],
- [null,"Analítica de riñón y orina antes y durante el Glucantime"],
- [null,"Análisis de orina: bacterias, UPC, cristales, densidad"],
+ ["2026-11-22","Última inyección de Glucantime (día 45)"],
+ ["2027-04-09","≈ Fin del alopurinol (6 meses)"],
  [null,"Ecografía ocular con sedación (tras ver la analítica)"],
  [null,"Ecografía abdominal (más adelante)"],
 ];
 
 const MED_NOW=[
- ["Glucantime","Mata al parásito (leishmanicida)","Inyección diaria · duración a confirmar","09/10/2026","En curso","ok"],
+ ["Glucantime","Mata al parásito (leishmanicida)","1 inyección al día, 17:00 · 45 días","09/10/2026","Hasta 22/11/2026","ok"],
+ ["Alopurinol","Frena al parásito a largo plazo","¾ de pastilla · 6 meses","09/10/2026","Hasta ≈ 09/04/2027","ok"],
+ ["Leistab","Leishmania · confirmar composición","1 y ½ al día","09/10/2026","En curso","ok"],
  ["Pred-forte","Corticoide para la uveítis","1 gota ojo dcho. · 9, 15, 21, 3 h","07/10/2026","Activo","ok"],
  ["ODM5","Ojo dcho. · confirmar","1 gota · 9, 15, 21, 3 h","07/10/2026","Activo","ok"],
  ["Farline","Ojo dcho. · confirmar","1 gota · 9 y 21 h","07/10/2026","Activo","ok"],
  ["Gabapentina","Dolor crónico por artrosis","Sin dosis en informes","04/07/2026","Confirmar","warn"],
  ["Previcox","Antiinflamatorio en picos de dolor","A demanda","10/09/2026","Si hace falta","warn"],
- ["Alopurinol","Frena al parásito; suele acompañar al Glucantime","—","31/05/2025","¿Sigue? Sin dato","bad"],
  ["Pienso renal + omegas, condroprotectores","SDMA alto, artrosis, peso","—","09/2026","Recomendado","warn"],
 ];
 const MED_PAST=[
@@ -574,9 +580,9 @@ const CONNS=[
  [["artic","leish"],"Cojeras que cambian de pata","Desde 2020 cojea de patas distintas (trasera dcha., delanteras). Además de artrosis y sobrepeso, la leishmania puede dar artritis. Su veterinaria lo tuvo en cuenta para tratar."],
  [["rinon","leish"],"El riñón decide el pronóstico","SDMA algo alto en 09/2026. Los UPC altos de 2024–2025 coincidieron con infección de orina, así que no sabemos cuánta proteína pierde de verdad el riñón."],
  [["rinon"],"Infecciones de orina repetidas","07/2024, 01/2025 (Enterobacter resistente a amoxiclav) y 10/2025. Útil saberlo antes de elegir antibiótico."],
- [["leish","rinon"],"Alopurinol y cristales","Tiene historia de cristales en orina. El alopurinol puede formar cristales de xantina; en 07/2024 no había. Hay que decidir si lo retoma."],
+ [["leish","rinon"],"Alopurinol y cristales","Retoma el alopurinol 6 meses. Tiene historia de cristales en orina; en 07/2024 no había xantina. La orina del 24/10 lo comprobará."],
  [["leish"],"La serología, tal como se ha pedido, no sirve para seguirle","Cinco resultados ≥1/640 desde 2022: el laboratorio deja de diluir ahí. Con una titulación completa antes y después del Glucantime sí se vería si baja."],
- [["leish","rinon"],"Glucantime y riñón","El Glucantime puede dañar el riñón y Chico tiene el SDMA algo alto. Una analítica de riñón y orina antes de empezar da la referencia para comparar."],
+ [["leish","rinon"],"Glucantime y riñón","El Glucantime puede dañar el riñón y Chico tiene el SDMA algo alto. La orina del 24/10 (día 16) es el primer control."],
  [["gen","artic"],"Peso y articulaciones","29 kg en 2022, obesidad 7/9 en 09/2026, 26,4 kg el 07/10/2026. Cada kilo de menos alivia rodillas y cadera."]
 ];
 
@@ -659,8 +665,8 @@ $("#order").addEventListener("click",e=>{desc=!desc;e.currentTarget.textContent=
  s+=band("2022-12-06","2023-01-03",88,"--c-leish")+band("2025-06-27","2025-07-25",88,"--c-leish")+band("2026-09-25","2026-10-08",88,"--c-leish")+band("2026-10-09","2026-11-22",88,"--c-boca",.85);
  s+=`<text x="${x("2022-12-06")+10}" y="${88+4}" style="fill:var(--ink)">1</text><text x="${x("2025-06-27")+10}" y="92" style="fill:var(--ink)">2</text><text x="${x("2026-09-25")-6}" y="92" text-anchor="end" style="fill:var(--ink)">3</text><text x="${x("2026-10-09")}" y="${88+22}" style="font-size:10px">Glucantime</text>`;
  // alopurinol: registrado 07/2024 en curso; ciclo 05/2025 → 10/2025 (a partir de ahí sin dato)
- s+=band("2024-07-05","2024-07-25",120,"--c-rinon",.5)+band("2025-05-31","2025-10-02",120,"--c-rinon");
- s+=`<text x="${x("2025-10-02")+6}" y="124">¿después?</text>`;
+ s+=band("2024-07-05","2024-07-25",120,"--c-rinon",.5)+band("2025-05-31","2025-10-02",120,"--c-rinon")+band("2026-10-09","2026-12-31",120,"--c-rinon");
+ s+=`<text x="${x("2025-10-02")+6}" y="124">sin dato</text>`;
  s+=band("2026-03-01","2026-10-08",152,"--c-ojo",.6);
  s+=`<text x="${L}" y="${88-14}">miltefosina / Glucantime</text><text x="${L}" y="${120-14}">alopurinol</text><text x="${L}" y="${152-14}">ojo</text><text x="${L}" y="14">serología IFI (techo del laboratorio: 1/640)</text>`;
  svg.innerHTML=s;
@@ -681,7 +687,7 @@ const SYN=[
  ["antibiotico","amoxicilina","marbofloxacino","amoxiclav","tobradex"],
  ["ojo","ocular","uveitis","cornea","episcleritis","queratitis","oftalmo","gotas","lagrima","fluoresceina","pred-forte","odm5","farline"],
  ["corticoide","pred-forte","prednisolona","tobradex"],
- ["leishmania","leish","ifi","elisa","serologia","miltefosina","milteforan","glucantime","alopurinol","domperidona","1/640"],
+ ["leishmania","leish","ifi","elisa","serologia","miltefosina","milteforan","glucantime","alopurinol","domperidona","leistab","1/640"],
  ["cojera","cojea","artrosis","crepitacion","articula","gabapentina","previcox","meloxicam","condroprotector","rodilla","cadera"],
  ["dolor","gabapentina","previcox","meloxicam","diclofenaco"],
  ["digestivo","diarrea","vomito","heces","moco","coprologico","piedras"],
