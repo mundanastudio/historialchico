@@ -183,6 +183,8 @@ mark{background:var(--warn-soft);color:inherit;border-radius:3px;padding:0 2px;b
 .slot.next + .slot{border-top-color:transparent}
 .slot.next .hr::after{content:"Próxima";display:block;font:600 .64rem/1.6 var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-top:2px}
 .slot.given .meds{opacity:.45}
+.slot.late:not(.given){border-left:3px solid var(--bad);padding-left:10px}
+@media (max-width:640px){.plan-head > div:last-child{justify-items:start!important}}
 .slot.given .hr{color:var(--muted)}
 @media (max-width:640px){
   .slot{grid-template-columns:62px 1fr;gap:10px}
@@ -270,10 +272,10 @@ mark{background:var(--warn-soft);color:inherit;border-radius:3px;padding:0 2px;b
   <div class="card plan" id="plan">
     <div class="plan-head">
       <div><div class="eyebrow">Cuadrante del día</div><h3 id="planTitle">Medicación por horas</h3></div>
-      <span class="note" id="planNote"></span>
+      <div style="display:grid;gap:4px;justify-items:end"><span class="note" id="planNote"></span><span id="planSync"></span></div>
     </div>
     <div id="slots"></div>
-    <p class="note">Gotas: esperar 10 minutos entre una y otra. Glucantime: cambiar el sitio de la inyección cada día. Las casillas “dado” se guardan solo en este dispositivo y se reinician cada día.</p>
+    <p class="note">Gotas: esperar 10 minutos entre una y otra. Glucantime: cambiar el sitio de la inyección cada día. Las casillas “dado” se reinician cada día a las 6:00.</p>
   </div>
 
   <div class="grid2">
@@ -623,7 +625,7 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",
 (()=>{const b=new Date(2015,4,10);let a=today.getFullYear()-b.getFullYear();if(today<new Date(today.getFullYear(),4,10))a--;$("#age").textContent=a+" años"})();
 
 
-// ---------- cuadrante diario ----------
+// ---------- cuadrante diario (compartido) ----------
 const PLAN=[
  {h:"09:00",lbl:"Desayuno",meds:[["Alopurinol","¾ pastilla","--c-rinon","2026-10-09","2027-04-09"],["Leistab","1 y ½ pastilla","--c-artic","2026-10-09",null],["Pred-forte","1 gota","--c-ojo","2026-10-07",null],["ODM5","1 gota","--c-ojo","2026-10-07",null],["Farline","1 gota","--c-ojo","2026-10-07",null]]},
  {h:"15:00",lbl:"Tarde",meds:[["Pred-forte","1 gota","--c-ojo","2026-10-07",null],["ODM5","1 gota","--c-ojo","2026-10-07",null]]},
@@ -631,26 +633,69 @@ const PLAN=[
  {h:"21:00",lbl:"Noche",meds:[["Pred-forte","1 gota","--c-ojo","2026-10-07",null],["ODM5","1 gota","--c-ojo","2026-10-07",null],["Farline","1 gota","--c-ojo","2026-10-07",null]]},
  {h:"03:00",lbl:"Madrugada",meds:[["Pred-forte","1 gota","--c-ojo","2026-10-07",null],["ODM5","1 gota","--c-ojo","2026-10-07",null]]},
 ];
+const isoD=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+// el "día de tratamiento" va de las 06:00 a las 06:00 (la toma de las 03:00 cuenta para el día anterior)
+function treatDay(){const n=new Date();const t=new Date(n);if(n.getHours()<6)t.setDate(t.getDate()-1);t.setHours(0,0,0,0);return t}
+const PS={mode:"local",db:null,user:null,me:null,canWrite:true,given:{},names:{},dkey:null,unsub:null};
+function loadLocal(){try{PS.given=JSON.parse(localStorage.getItem("chico-plan-"+PS.dkey)||"{}")}catch(e){PS.given={}}}
+function subscribeDay(){
+ const dk=isoD(treatDay());if(dk===PS.dkey&&(PS.unsub||PS.mode==="local"))return;
+ PS.dkey=dk;if(PS.unsub){PS.unsub();PS.unsub=null}
+ if(PS.mode!=="shared"){loadLocal();renderPlan();return}
+ PS.given={};renderPlan();
+ PS.unsub=PS.db.collection("tomas").where("day","==",dk).onSnapshot(async snap=>{
+   const g={};snap.docs.forEach(d=>{const v=d.data();if(v&&v.h)g[v.h]={by:v.by,at:v.at}});
+   PS.given=g;
+   const ids=[...new Set(Object.values(g).map(v=>v.by).filter(Boolean))];
+   if(ids.length&&PS.user){try{const ps=await PS.user.profiles(ids);ids.forEach(id=>PS.names[id]=ps[id]?.isMe?"tú":(ps[id]?.name||"otra persona"))}catch(e){}}
+   renderPlan();
+ },()=>{PS.mode="local";PS.unsub=null;loadLocal();renderPlan()});
+}
 function renderPlan(){
- const now=new Date();
- // el "día de tratamiento" va de 09:00 a la toma de las 03:00 siguiente
- const tday=new Date(now);if(now.getHours()<6)tday.setDate(tday.getDate()-1);tday.setHours(0,0,0,0);
- const iso=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
- const dkey=iso(tday);
- let given={};try{given=JSON.parse(localStorage.getItem("chico-plan-"+dkey)||"{}")}catch(e){}
+ const now=new Date(),tday=treatDay(),dkey=isoD(tday);
  const mins=h=>{let[a,b]=h.split(":").map(Number);if(a<6)a+=24;return a*60+b};
  let nm=now.getHours()*60+now.getMinutes();if(now.getHours()<6)nm+=1440;
  const active=m=>dkey>=m[3]&&(!m[4]||dkey<=m[4]);
  const slots=PLAN.map(s=>({...s,meds:s.meds.filter(active)})).filter(s=>s.meds.length);
- const nxt=slots.find(s=>mins(s.h)+30>=nm&&!given[s.h]);
- $("#planNote").textContent=`${tday.toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long"})}`;
- $("#slots").innerHTML=slots.map(s=>`<div class="slot${s===nxt?" next":""}${given[s.h]?" given":""}">
+ const G=PS.given;
+ const nxt=slots.find(s=>mins(s.h)+30>=nm&&!G[s.h]);
+ const late=slots.filter(s=>mins(s.h)+30<nm&&!G[s.h]);
+ $("#planNote").textContent=tday.toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long"});
+ $("#planSync").innerHTML=PS.mode==="shared"
+   ?`<span class="pill p-ok">Compartido: lo que marquéis se ve en todos los dispositivos</span>`
+   :`<span class="pill p-warn">Solo en este dispositivo</span>`;
+ $("#slots").innerHTML=slots.map(s=>{const g=G[s.h];
+  const who=g?` · ${esc(PS.names[g.by]||(PS.mode==="local"?"":"…"))}${g.at?" "+new Date(g.at).toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"}):""}`.replace(" ·  "," · "):"";
+  return `<div class="slot${s===nxt?" next":""}${g?" given":""}${late.includes(s)?" late":""}">
   <div class="hr">${s.h}<small>${s.lbl}</small></div>
   <div class="meds">${s.meds.map(m=>`<span class="med" style="--cat:var(${m[2]})"><b>${esc(m[0])}</b><span>${esc(m[1])}</span></span>`).join("")}</div>
-  <label class="done"><input type="checkbox" id="g-${s.h.replace(":","")}" data-h="${s.h}" ${given[s.h]?"checked":""}> dado</label></div>`).join("");
- $("#slots").onchange=e=>{const h=e.target.dataset.h;if(!h)return;given[h]=e.target.checked;try{localStorage.setItem("chico-plan-"+dkey,JSON.stringify(given))}catch(_){ }renderPlan()};
+  <label class="done"><input type="checkbox" id="g-${s.h.replace(":","")}" data-h="${s.h}" ${g?"checked":""} ${PS.canWrite?"":"disabled"}> ${g?"dado"+who:(late.includes(s)?"<b style='color:var(--bad)'>sin marcar</b>":"dado")}</label></div>`}).join("");
 }
-renderPlan();setInterval(renderPlan,5*60*1000);
+$("#slots").addEventListener("change",async e=>{
+ const h=e.target.dataset.h;if(!h)return;const on=e.target.checked;const dk=PS.dkey;
+ if(PS.mode==="shared"){
+   const ref=PS.db.collection("tomas").doc(dk+"_"+h.replace(":",""));
+   e.target.disabled=true;
+   try{ if(on) await ref.set({day:dk,h,by:PS.me||null,at:new Date().toISOString()}); else await ref.delete(); }
+   catch(err){ if(err&&err.code==="invalid_argument"){PS.canWrite=false} e.target.checked=!on; renderPlan(); }
+   return;
+ }
+ if(on)PS.given[h]={at:new Date().toISOString()};else delete PS.given[h];
+ try{localStorage.setItem("chico-plan-"+dk,JSON.stringify(PS.given))}catch(_){ }
+ renderPlan();
+});
+subscribeDay();
+setInterval(()=>{subscribeDay();renderPlan()},60*1000);
+(async()=>{
+ if(!window.claude||!window.claude.use)return;
+ try{
+  const [db,user]=await Promise.all([claude.use("db"),claude.use("user")]);
+  if(!db)return;
+  PS.db=db;PS.user=user;PS.mode="shared";
+  if(user){try{PS.me=await user.id()}catch(e){} try{const c=await user.can("data.write");if(c===false)PS.canWrite=false}catch(e){}}
+  PS.dkey=null;subscribeDay();
+ }catch(e){}
+})();
 
 // glucantime (45 días previstos)
 (()=>{const s=pd("2026-10-09"),N=45;const day=Math.floor((today-s)/864e5)+1;
