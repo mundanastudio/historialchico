@@ -314,7 +314,7 @@ mark{background:var(--warn-soft);color:inherit;border-radius:3px;padding:0 2px;b
       <ul class="plain">
         <li><span class="tag" style="--cat:var(--c-leish)">Leish</span><span>Leishmaniosis con serología siempre ≥1/640 (el laboratorio no diluye más). Miltefosina cortada. Desde el 09/10/2026: Glucantime 45 días + alopurinol 6 meses + Leistab.</span></li>
         <li><span class="tag" style="--cat:var(--c-ojo)">Ojo</span><span>Uveítis crónica, episcleritis, queratitis y edema de córnea en el ojo derecho. Todavía ve. Pronóstico visual reservado.</span></li>
-        <li><span class="tag" style="--cat:var(--c-rinon)">Riñón</span><span>SDMA algo alto (09/2026). UPC alto en el pasado, pero siempre con orina infectada. Infecciones de orina repetidas.</span></li>
+        <li><span class="tag" style="--cat:var(--c-rinon)">Riñón</span><span>SDMA algo alto (09/2026). UPC alto en el pasado, pero siempre con orina infectada. Orina del 19/10/2026: sin cristales ni infección.</span></li>
         <li><span class="tag" style="--cat:var(--c-artic)">Artic.</span><span>Artrosis en rodillas y cadera, cojeras que cambian de pata desde 2020. Gabapentina y Previcox 1 vez por semana (desde 16/10/2026).</span></li>
         <li><span class="tag" style="--cat:var(--c-gen)">Peso</span><span>26,4 kg (07/10/2026), 2,6 kg menos que en 2022. Condición corporal 7/9 en 09/2026: sigue necesitando bajar.</span></li>
         <li><span class="tag" style="--cat:var(--c-boca)">Boca</span><span>Enfermedad periodontal avanzada. Limpieza el 10/09/2026; algún incisivo se mueve.</span></li>
@@ -468,7 +468,7 @@ mark{background:var(--warn-soft);color:inherit;border-radius:3px;padding:0 2px;b
     <div class="card">
       <div class="eyebrow">Preguntas para la próxima consulta</div>
       <ol class="qs">
-        <li><b>Controles durante el Glucantime:</b> además de la orina del 19/10, ¿cuándo analítica de sangre (riñón)?</li>
+        <li><b>Controles durante el Glucantime:</b> la orina del 19/10 salió bien; ¿cuándo la siguiente y cuándo analítica de sangre (riñón)? ¿Cuál fue el UPC?</li>
         <li><b>¿En qué estadio LeishVet está?</b> Con creatinina, SDMA, proteinograma y UPC actuales.</li>
         <li><b>Alopurinol y riñón:</b> ¿hace falta ajustar la dosis si el SDMA sigue alto? ¿Dieta baja en purinas?</li>
         <li><b>Leistab:</b> ¿qué lleva? ¿Termina con el Glucantime o sigue mientras tome alopurinol?</li>
@@ -568,12 +568,12 @@ const EV=[
 ["2026-10-08",["leish"],"Se corta la miltefosina","Día 14 de 28. Se cambia a Glucantime.",1],
 ["2026-10-09",["leish"],"Empieza Glucantime (antimoniato de meglumina)","Primera inyección a las 17:00. 45 días, hasta el 22/11/2026.",1],
 ["2026-10-09",["leish","rinon"],"Empieza alopurinol (6 meses) y Leistab","Alopurinol ¾ de pastilla hasta ≈ 09/04/2027. Leistab 1 y ½ al día mientras dure el tratamiento de leishmania. Muestra de orina en 15 días.",1],
+["2026-10-19",["rinon","leish"],"Primer análisis de orina: todo en orden","Sin cristales y sin infección. Día 11 de Glucantime y de alopurinol.",1],
 ["2026-10-16",["artic"],"Previcox 1 vez por semana","Antiinflamatorio para la artrosis, pauta semanal.",1],
 ["2026-10-07",["ojo"],"Oftalmología: uveítis crónica del ojo derecho","Todavía ve. Episcleritis, queratitis y edema de córnea en ojo dcho.; esclerosis nuclear (de la edad) en el izquierdo. Presión ocular 10 dcho. / 19 izq. Lágrima 17 / 20. Pred-forte y ODM5 a las 9, 15, 21 y 3 h; Farline a las 9 y 21 h. Revisión en 15 días; ecografía ocular pendiente.",1]
 ];
 
 const UPCOMING=[
- ["2026-10-19","Primer análisis de orina (llevar muestra al veterinario)"],
  ["2026-10-22","Revisión con el oftalmólogo"],
  ["2026-11-22","Última inyección de Glucantime (día 45)"],
  ["2027-04-09","≈ Fin del alopurinol (6 meses)"],
@@ -611,10 +611,10 @@ const CONNS=[
  [["ojo","leish"],"El ojo es leishmania, no ojo seco","En abril se trató como úlcera y luego como ojo seco. Ahora la lágrima es normal (17 mm/min; se considera normal por encima de 15) y oftalmología atribuye todo a la leishmania. La presión baja del ojo derecho (10 frente a 19) encaja con uveítis."],
  [["artic","leish"],"Cojeras que cambian de pata","Desde 2020 cojea de patas distintas (trasera dcha., delanteras). Además de artrosis y sobrepeso, la leishmania puede dar artritis. Su veterinaria lo tuvo en cuenta para tratar."],
  [["rinon","leish"],"El riñón decide el pronóstico","SDMA algo alto en 09/2026. Los UPC altos de 2024–2025 coincidieron con infección de orina, así que no sabemos cuánta proteína pierde de verdad el riñón."],
- [["rinon"],"Infecciones de orina repetidas","07/2024, 01/2025 (Enterobacter resistente a amoxiclav) y 10/2025. Útil saberlo antes de elegir antibiótico."],
- [["leish","rinon"],"Alopurinol y cristales","Retoma el alopurinol 6 meses. Tiene historia de cristales en orina; en 07/2024 no había xantina. La orina del 19/10 lo comprobará."],
+ [["rinon"],"Infecciones de orina repetidas","07/2024, 01/2025 (Enterobacter resistente a amoxiclav) y 10/2025. La orina del 19/10/2026 salió sin infección. Útil saberlo antes de elegir antibiótico."],
+ [["leish","rinon"],"Alopurinol y cristales","Retoma el alopurinol 6 meses. Tiene historia de cristales en orina; en 07/2024 no había xantina, y el 19/10/2026 (10 días de alopurinol) tampoco hay cristales."],
  [["leish"],"La serología, tal como se ha pedido, no sirve para seguirle","Cinco resultados ≥1/640 desde 2022: el laboratorio deja de diluir ahí. Con una titulación completa antes y después del Glucantime sí se vería si baja."],
- [["leish","rinon"],"Glucantime y riñón","El Glucantime puede dañar el riñón y Chico tiene el SDMA algo alto. La orina del 19/10 (día 11 de Glucantime) es el primer control."],
+ [["leish","rinon"],"Glucantime y riñón","El Glucantime puede dañar el riñón y Chico tiene el SDMA algo alto. Primer control, el 19/10 (día 11 de Glucantime): orina sin cristales ni infección."],
  [["gen","artic"],"Peso y articulaciones","29 kg en 2022, obesidad 7/9 en 09/2026, 26,4 kg el 07/10/2026. Cada kilo de menos alivia rodillas y cadera."]
 ];
 
