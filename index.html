@@ -277,7 +277,7 @@ mark{background:var(--warn-soft);color:inherit;border-radius:3px;padding:0 2px;b
     </div>
     <div id="slots"></div>
     <div class="slot weekly" id="weekly"></div>
-    <p class="note">Gotas: esperar 10 minutos entre una y otra. Glucantime: cambiar el sitio de la inyección cada día. Las casillas “dado” se reinician cada día a las 6:00; la del Previcox, cada lunes.</p>
+    <p class="note">Gotas: esperar 10 minutos entre una y otra. Glucantime: cambiar el sitio de la inyección cada día. Las casillas “dado” se reinician cada día a las 6:00; la del Daxocox, cada lunes. Daxocox siempre con el estómago lleno.</p>
   </div>
 
   <div class="grid2">
@@ -292,7 +292,7 @@ mark{background:var(--warn-soft);color:inherit;border-radius:3px;padding:0 2px;b
       <ul class="plain">
         <li><span class="when"><b>Alopurinol</b>6 meses</span><span>¾ de pastilla, desde el 09/10/2026 hasta ≈ 09/04/2027. Vigilar cristales en orina; dieta baja en purinas.</span></li>
         <li><span class="when"><b>Leistab</b>diario</span><span>1 y ½ pastilla al día, mientras dure el tratamiento de leishmania (≈ hasta el 09/04/2027).</span></li>
-        <li><span class="when"><b>Previcox</b>semanal</span><span>1 vez por semana, desde el 16/10/2026. Antiinflamatorio para el dolor de las articulaciones.</span></li>
+        <li><span class="when"><b>Daxocox</b>semanal</span><span>140 mg los martes por la noche, siempre con el estómago lleno. Desde el 20/10/2026. Antiinflamatorio para las articulaciones (sustituye al Previcox).</span></li>
       </ul>
     </div>
     <div class="card">
@@ -315,7 +315,7 @@ mark{background:var(--warn-soft);color:inherit;border-radius:3px;padding:0 2px;b
         <li><span class="tag" style="--cat:var(--c-leish)">Leish</span><span>Leishmaniosis con serología siempre ≥1/640 (el laboratorio no diluye más). Miltefosina cortada. Desde el 09/10/2026: Glucantime 45 días + alopurinol 6 meses + Leistab.</span></li>
         <li><span class="tag" style="--cat:var(--c-ojo)">Ojo</span><span>Uveítis crónica, episcleritis, queratitis y edema de córnea en el ojo derecho. Todavía ve. Pronóstico visual reservado.</span></li>
         <li><span class="tag" style="--cat:var(--c-rinon)">Riñón</span><span>SDMA algo alto (09/2026). UPC alto en el pasado, pero siempre con orina infectada. Orina del 19/10/2026: sin cristales ni infección.</span></li>
-        <li><span class="tag" style="--cat:var(--c-artic)">Artic.</span><span>Artrosis en rodillas y cadera, cojeras que cambian de pata desde 2020. Gabapentina y Previcox 1 vez por semana (desde 16/10/2026).</span></li>
+        <li><span class="tag" style="--cat:var(--c-artic)">Artic.</span><span>Artrosis en rodillas y cadera, cojeras que cambian de pata desde 2020. Gabapentina y Daxocox 140 mg los martes por la noche (desde 20/10/2026).</span></li>
         <li><span class="tag" style="--cat:var(--c-gen)">Peso</span><span>26,4 kg (07/10/2026), 2,6 kg menos que en 2022. Condición corporal 7/9 en 09/2026: sigue necesitando bajar.</span></li>
         <li><span class="tag" style="--cat:var(--c-boca)">Boca</span><span>Enfermedad periodontal avanzada. Limpieza el 10/09/2026; algún incisivo se mueve.</span></li>
       </ul>
@@ -474,7 +474,7 @@ mark{background:var(--warn-soft);color:inherit;border-radius:3px;padding:0 2px;b
         <li><b>Leistab:</b> ¿qué lleva? ¿Termina con el Glucantime o sigue mientras tome alopurinol?</li>
         <li><b>¿Repetimos UPC con orina limpia?</b> Todos los UPC altos han coincidido con infección.</li>
         <li><b>¿Pedimos la titulación completa de la IFI?</b> Una línea base antes del Glucantime permitiría ver si baja después.</li>
-        <li><b>Previcox con el riñón:</b> ¿controlamos el riñón por tomarlo cada semana junto al Glucantime?</li>
+        <li><b>Daxocox con el riñón:</b> ¿controlamos el riñón por tomarlo cada semana junto al Glucantime? ¿La primera toma lleva dosis de carga?</li>
         <li><b>¿Para qué sirven ODM5 y Farline?</b> ¿Hasta cuándo seguir con las gotas?</li>
         <li><b>Tacrolimus:</b> se propuso en 09/2026. ¿Sigue haciendo falta ahora que el lagrimal (STT) es normal?</li>
         <li><b>Peso objetivo.</b> Pesa 26,4 kg (07/10/2026).</li>
@@ -569,7 +569,9 @@ const EV=[
 ["2026-10-09",["leish"],"Empieza Glucantime (antimoniato de meglumina)","Primera inyección a las 17:00. 45 días, hasta el 22/11/2026.",1],
 ["2026-10-09",["leish","rinon"],"Empieza alopurinol (6 meses) y Leistab","Alopurinol ¾ de pastilla hasta ≈ 09/04/2027. Leistab 1 y ½ al día mientras dure el tratamiento de leishmania. Muestra de orina en 15 días.",1],
 ["2026-10-19",["rinon","leish"],"Primer análisis de orina: todo en orden","Sin cristales y sin infección. Día 11 de Glucantime y de alopurinol.",1],
-["2026-10-16",["artic"],"Previcox 1 vez por semana","Antiinflamatorio para la artrosis, pauta semanal.",1],
+["2026-10-16",["artic"],"Previcox 1 vez por semana","Antiinflamatorio para la artrosis, pauta semanal.",0],
+["2026-10-17",["artic"],"Deja el Previcox","",0],
+["2026-10-20",["artic"],"Empieza Daxocox 140 mg semanal","Los martes por la noche, con el estómago lleno. Sustituye al Previcox.",1],
 ["2026-10-07",["ojo"],"Oftalmología: uveítis crónica del ojo derecho","Todavía ve. Episcleritis, queratitis y edema de córnea en ojo dcho.; esclerosis nuclear (de la edad) en el izquierdo. Presión ocular 10 dcho. / 19 izq. Lágrima 17 / 20. Pred-forte y ODM5 a las 9, 15, 21 y 3 h; Farline a las 9 y 21 h. Revisión en 15 días; ecografía ocular pendiente.",1]
 ];
 
@@ -589,10 +591,11 @@ const MED_NOW=[
  ["ODM5","Ojo dcho. · confirmar","1 gota · 9, 15, 21, 3 h","07/10/2026","Activo","ok"],
  ["Farline","Ojo dcho. · confirmar","1 gota · 9 y 21 h","07/10/2026","Activo","ok"],
  ["Gabapentina","Dolor crónico por artrosis","Sin dosis en informes","04/07/2026","Confirmar","warn"],
- ["Previcox","Antiinflamatorio para la artrosis","1 vez por semana","16/10/2026","En curso","ok"],
+ ["Daxocox 140 mg","Antiinflamatorio para la artrosis","Martes por la noche, con el estómago lleno · 1 vez por semana","20/10/2026","En curso","ok"],
  ["Pienso renal + omegas, condroprotectores","SDMA alto, artrosis, peso","—","09/2026","Recomendado","warn"],
 ];
 const MED_PAST=[
+ ["Previcox","Artrosis, 1 vez por semana","hasta 17/10/2026","Sustituido por Daxocox"],
  ["Milteforan (miltefosina)","Leishmania, ciclo 1","12/2022",""],
  ["Miltefosina","Leishmania, ciclo 3","25/09 – 08/10/2026","Cortada en el día 14 de 28 para pasar a Glucantime"],
  ["Miltefosina","Leishmania, ciclo 2","06/2025",""],
@@ -641,10 +644,10 @@ const isoD=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${St
 // el "día de tratamiento" va de las 06:00 a las 06:00 (la toma de las 03:00 cuenta para el día anterior)
 function treatDay(){const n=new Date();const t=new Date(n);if(n.getHours()<6)t.setDate(t.getDate()-1);t.setHours(0,0,0,0);return t}
 const PS={mode:"local",db:null,user:null,me:null,canWrite:true,given:{},names:{},dkey:null,unsub:null,wgiven:null,wkey:null,wunsub:null};
-// semana (lunes a domingo) para el Previcox
+// semana (lunes a domingo) para el Daxocox
 function weekKey(){const t=treatDay();const d=(t.getDay()+6)%7;const m=new Date(t);m.setDate(t.getDate()-d);return "w"+isoD(m)}
-const WEEKLY={name:"Previcox",dose:"1 vez por semana",cat:"--c-artic",from:"2026-10-16"};
-function loadLocalW(){try{PS.wgiven=JSON.parse(localStorage.getItem("chico-prev-"+PS.wkey)||"null")}catch(e){PS.wgiven=null}}
+const WEEKLY={name:"Daxocox",dose:"140 mg · con el estómago lleno",cat:"--c-artic",from:"2026-10-20",dow:2,h:21};
+function loadLocalW(){try{PS.wgiven=JSON.parse(localStorage.getItem("chico-dax-"+PS.wkey)||"null")}catch(e){PS.wgiven=null}}
 async function nameOf(id){if(!id||!PS.user)return;if(PS.names[id])return;try{const ps=await PS.user.profiles([id]);PS.names[id]=ps[id]?.isMe?"tú":(ps[id]?.name||"otra persona")}catch(e){}}
 function subscribeWeek(){
  const wk=weekKey();if(wk===PS.wkey&&(PS.wunsub||PS.mode==="local"))return;
@@ -652,7 +655,7 @@ function subscribeWeek(){
  if(PS.mode!=="shared"){loadLocalW();renderWeekly();return}
  PS.wgiven=null;renderWeekly();
  PS.wunsub=PS.db.collection("semanal").where("week","==",wk).onSnapshot(async snap=>{
-   const d=snap.docs.map(x=>x.data()).find(v=>v&&v.med==="previcox");
+   const d=snap.docs.map(x=>x.data()).find(v=>v&&v.med==="daxocox");
    PS.wgiven=d?{by:d.by,at:d.at}:null; if(d)await nameOf(d.by); renderWeekly();
  },()=>{PS.wunsub=null;loadLocalW();renderWeekly()});
 }
@@ -662,10 +665,12 @@ function renderWeekly(){
  const g=PS.wgiven;
  const when=g&&g.at?new Date(g.at).toLocaleDateString("es-ES",{weekday:"long",day:"numeric"})+" "+new Date(g.at).toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"}):"";
  const who=g&&PS.mode==="shared"?(PS.names[g.by]||"…")+", ":"";
- el.className="slot weekly"+(g?" given":"");
- el.innerHTML=`<div class="hr">1×<small>Semanal</small></div>
+ const now=new Date(),td=treatDay(),isDay=td.getDay()===WEEKLY.dow;
+ const past=(td.getDay()+6)%7>(WEEKLY.dow+6)%7||(isDay&&(now.getHours()>=WEEKLY.h+1||now.getHours()<6));
+ el.className="slot weekly"+(g?" given":"")+(!g&&isDay?" next":"")+(!g&&past?" late":"");
+ el.innerHTML=`<div class="hr">Mar<small>${String(WEEKLY.h).padStart(2,"0")}:00 · semanal</small></div>
   <div class="meds"><span class="med" style="--cat:var(${WEEKLY.cat})"><b>${WEEKLY.name}</b><span>${WEEKLY.dose}</span></span></div>
-  <label class="done"><input type="checkbox" id="g-previcox" ${g?"checked":""} ${PS.canWrite?"":"disabled"}> ${g?"dado esta semana · "+esc(who+when):"<b style='color:var(--warn)'>pendiente esta semana</b>"}</label>`;
+  <label class="done"><input type="checkbox" id="g-daxocox" ${g?"checked":""} ${PS.canWrite?"":"disabled"}> ${g?"dado esta semana · "+esc(who+when):(past?"<b style='color:var(--bad)'>sin dar esta semana</b>":isDay?"<b style='color:var(--accent)'>toca hoy</b>":"pendiente: el martes")}</label>`;
 }
 function loadLocal(){try{PS.given=JSON.parse(localStorage.getItem("chico-plan-"+PS.dkey)||"{}")}catch(e){PS.given={}}}
 function subscribeDay(){
@@ -719,13 +724,13 @@ setInterval(()=>{subscribeDay();subscribeWeek();renderPlan()},60*1000);
 $("#weekly").addEventListener("change",async e=>{
  const on=e.target.checked;const wk=PS.wkey;
  if(PS.mode==="shared"){
-   const ref=PS.db.collection("semanal").doc(wk+"_previcox");e.target.disabled=true;
-   try{ if(on) await ref.set({week:wk,med:"previcox",by:PS.me||null,at:new Date().toISOString()}); else await ref.delete(); }
+   const ref=PS.db.collection("semanal").doc(wk+"_daxocox");e.target.disabled=true;
+   try{ if(on) await ref.set({week:wk,med:"daxocox",by:PS.me||null,at:new Date().toISOString()}); else await ref.delete(); }
    catch(err){ if(err&&err.code==="invalid_argument")PS.canWrite=false; e.target.checked=!on; renderWeekly(); }
    return;
  }
  PS.wgiven=on?{at:new Date().toISOString()}:null;
- try{localStorage.setItem("chico-prev-"+wk,JSON.stringify(PS.wgiven))}catch(_){ }
+ try{localStorage.setItem("chico-dax-"+wk,JSON.stringify(PS.wgiven))}catch(_){ }
  renderWeekly();
 });
 (async()=>{
@@ -831,8 +836,8 @@ const SYN=[
  ["ojo","ocular","uveitis","cornea","episcleritis","queratitis","oftalmo","gotas","lagrima","fluoresceina","pred-forte","odm5","farline"],
  ["corticoide","pred-forte","prednisolona","tobradex"],
  ["leishmania","leish","ifi","elisa","serologia","miltefosina","milteforan","glucantime","alopurinol","domperidona","leistab","1/640"],
- ["cojera","cojea","artrosis","crepitacion","articula","gabapentina","previcox","meloxicam","condroprotector","rodilla","cadera"],
- ["dolor","gabapentina","previcox","meloxicam","diclofenaco"],
+ ["cojera","cojea","artrosis","crepitacion","articula","gabapentina","previcox","daxocox","meloxicam","condroprotector","rodilla","cadera"],
+ ["dolor","antiinflamatorio","gabapentina","previcox","daxocox","meloxicam","diclofenaco"],
  ["digestivo","diarrea","vomito","heces","moco","coprologico","piedras"],
  ["boca","dental","diente","incisivo","sarro","periodontal","epulis","raices"],
  ["peso","kg","sobrepeso","obesidad","condicion corporal"],
