@@ -277,7 +277,7 @@ mark{background:var(--warn-soft);color:inherit;border-radius:3px;padding:0 2px;b
     </div>
     <div id="slots"></div>
     <div class="slot weekly" id="weekly"></div>
-    <p class="note">Gotas: esperar 10 minutos entre una y otra. Glucantime: cambiar el sitio de la inyección cada día. Las casillas “dado” se reinician cada día a las 6:00; la del Daxocox, cada lunes. Daxocox siempre con el estómago lleno.</p>
+    <p class="note">Gotas: esperar 10 minutos entre una y otra. Glucantime: cambiar el sitio de la inyección cada día. A las 9 hay 4 gotas: 40 minutos en total. Las casillas “dado” se reinician cada día a las 6:00; la del Daxocox, cada lunes. Daxocox siempre con el estómago lleno.</p>
   </div>
 
   <div class="grid2">
@@ -298,8 +298,8 @@ mark{background:var(--warn-soft);color:inherit;border-radius:3px;padding:0 2px;b
     <div class="card">
       <div class="eyebrow">Ojo derecho · desde el 07/10/2026</div>
       <h3>Gotas en el ojo derecho</h3>
-      <p>Pred-forte y ODM5 a las 9, 15, 21 y 3 h. Farline a las 9 y 21 h. Están en el cuadrante de arriba.</p>
-      <p class="note">Pred-forte es un corticoide (prednisolona). Confirmar para qué son ODM5 y Farline.</p>
+      <p>Desde el 22/10: Pred-forte a las 9, 15, 21 y 3 h. ODM5 a las 9, 17 y 1 h. Farline y Tropicamida a las 9 y 21 h. Mínimo 10 minutos entre gotas. Están en el cuadrante de arriba.</p>
+      <p class="note">Pred-forte es un corticoide (prednisolona). Tropicamida dilata la pupila: alivia el dolor de la uveítis y evita que el iris se pegue; tendrá la pupila grande y le molestará más la luz. Confirmar para qué son ODM5 y Farline.</p>
       <p class="note">Revisión con el oftalmólogo el 22/10/2026.</p>
     </div>
   </div>
@@ -574,11 +574,11 @@ const EV=[
 ["2026-10-16",["artic"],"Previcox 1 vez por semana","Antiinflamatorio para la artrosis, pauta semanal.",0],
 ["2026-10-17",["artic"],"Deja el Previcox","",0],
 ["2026-10-20",["artic"],"Empieza Daxocox 140 mg semanal","Los martes por la noche, con el estómago lleno. Sustituye al Previcox.",1],
+["2026-10-22",["ojo"],"Revisión de oftalmología: va mejorando","Cambio de gotas: Pred-forte cada 6 h (9, 15, 21, 3 h), ODM5 pasa a cada 8 h (9, 17, 1 h), Farline cada 12 h (9 y 21 h) y se añade Tropicamida cada 12 h (9 y 21 h). Mínimo 10 minutos entre gotas.",1],
 ["2026-10-07",["ojo"],"Oftalmología: uveítis crónica del ojo derecho","Todavía ve. Episcleritis, queratitis y edema de córnea en ojo dcho.; esclerosis nuclear (de la edad) en el izquierdo. Presión ocular 10 dcho. / 19 izq. Lágrima 17 / 20. Pred-forte y ODM5 a las 9, 15, 21 y 3 h; Farline a las 9 y 21 h. Revisión en 15 días; ecografía ocular pendiente.",1]
 ];
 
 const UPCOMING=[
- ["2026-10-22","Revisión con el oftalmólogo"],
  ["2026-11-22","Última inyección de Glucantime (día 45)"],
  ["2027-04-09","≈ Fin del alopurinol (6 meses)"],
  [null,"Ecografía ocular con sedación (tras ver la analítica)"],
@@ -590,7 +590,8 @@ const MED_NOW=[
  ["Alopurinol","Frena al parásito a largo plazo","¾ de pastilla · 6 meses","09/10/2026","Hasta ≈ 09/04/2027","ok"],
  ["Leistab","Leishmania · confirmar composición","1 y ½ al día, mientras dure el tratamiento","09/10/2026","Hasta ≈ 09/04/2027","ok"],
  ["Pred-forte","Corticoide para la uveítis","1 gota ojo dcho. · 9, 15, 21, 3 h","07/10/2026","Activo","ok"],
- ["ODM5","Ojo dcho. · confirmar","1 gota · 9, 15, 21, 3 h","07/10/2026","Activo","ok"],
+ ["ODM5","Ojo dcho. · confirmar","1 gota cada 8 h · 9, 17, 1 h","07/10/2026","Activo","ok"],
+ ["Tropicamida","Ojo dcho. · dilata la pupila (uveítis)","1 gota cada 12 h · 9 y 21 h","22/10/2026","Activo","ok"],
  ["Farline","Ojo dcho. · confirmar","1 gota · 9 y 21 h","07/10/2026","Activo","ok"],
  ["Gabapentina","Dolor crónico por artrosis","Sin dosis en informes","04/07/2026","Confirmar","warn"],
  ["Daxocox 140 mg","Antiinflamatorio para la artrosis","Martes por la noche, con el estómago lleno · 1 vez por semana","20/10/2026","En curso","ok"],
@@ -636,11 +637,12 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",
 
 // ---------- cuadrante diario (compartido) ----------
 const PLAN=[
- {h:"09:00",lbl:"Desayuno",meds:[["Alopurinol","¾ pastilla","--c-rinon","2026-10-09","2027-04-09"],["Leistab","1 y ½ pastilla","--c-artic","2026-10-09","2027-04-09"],["Pred-forte","1 gota","--c-ojo","2026-10-07",null],["ODM5","1 gota","--c-ojo","2026-10-07",null],["Farline","1 gota","--c-ojo","2026-10-07",null]]},
- {h:"15:00",lbl:"Tarde",meds:[["Pred-forte","1 gota","--c-ojo","2026-10-07",null],["ODM5","1 gota","--c-ojo","2026-10-07",null]]},
- {h:"17:00",lbl:"Inyección",meds:[["Glucantime","inyección","--c-leish","2026-10-09","2026-11-22"]]},
- {h:"21:00",lbl:"Noche",meds:[["Pred-forte","1 gota","--c-ojo","2026-10-07",null],["ODM5","1 gota","--c-ojo","2026-10-07",null],["Farline","1 gota","--c-ojo","2026-10-07",null]]},
- {h:"03:00",lbl:"Madrugada",meds:[["Pred-forte","1 gota","--c-ojo","2026-10-07",null],["ODM5","1 gota","--c-ojo","2026-10-07",null]]},
+ {h:"09:00",lbl:"Desayuno",meds:[["Alopurinol","¾ pastilla","--c-rinon","2026-10-09","2027-04-09"],["Leistab","1 y ½ pastilla","--c-artic","2026-10-09","2027-04-09"],["Pred-forte","1 gota","--c-ojo","2026-10-07",null],["ODM5","1 gota","--c-ojo","2026-10-07",null],["Farline","1 gota","--c-ojo","2026-10-07",null],["Tropicamida","1 gota","--c-ojo","2026-10-22",null]]},
+ {h:"15:00",lbl:"Tarde",meds:[["Pred-forte","1 gota","--c-ojo","2026-10-07",null],["ODM5","1 gota","--c-ojo","2026-10-07","2026-10-21"]]},
+ {h:"17:00",lbl:"Inyección",meds:[["Glucantime","inyección","--c-leish","2026-10-09","2026-11-22"],["ODM5","1 gota","--c-ojo","2026-10-22",null]]},
+ {h:"21:00",lbl:"Noche",meds:[["Pred-forte","1 gota","--c-ojo","2026-10-07",null],["ODM5","1 gota","--c-ojo","2026-10-07","2026-10-21"],["Farline","1 gota","--c-ojo","2026-10-07",null],["Tropicamida","1 gota","--c-ojo","2026-10-22",null]]},
+ {h:"01:00",lbl:"Noche",meds:[["ODM5","1 gota","--c-ojo","2026-10-22",null]]},
+ {h:"03:00",lbl:"Madrugada",meds:[["Pred-forte","1 gota","--c-ojo","2026-10-07",null],["ODM5","1 gota","--c-ojo","2026-10-07","2026-10-21"]]},
 ];
 const isoD=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
 // el "día de tratamiento" va de las 06:00 a las 06:00 (la toma de las 03:00 cuenta para el día anterior)
@@ -835,7 +837,7 @@ const SYN=[
  ["orina","urinari","cistitis","cistocentesis","upc","sedimento","pis"],
  ["infeccion","bacteria","cultivo","enterobacter","cistitis","antibiotico"],
  ["antibiotico","amoxicilina","marbofloxacino","amoxiclav","tobradex"],
- ["ojo","ocular","uveitis","cornea","episcleritis","queratitis","oftalmo","gotas","lagrima","fluoresceina","pred-forte","odm5","farline"],
+ ["ojo","ocular","uveitis","cornea","episcleritis","queratitis","oftalmo","gotas","lagrima","fluoresceina","pred-forte","odm5","farline","tropicamida","pupila"],
  ["corticoide","pred-forte","prednisolona","tobradex"],
  ["leishmania","leish","ifi","elisa","serologia","miltefosina","milteforan","glucantime","alopurinol","domperidona","leistab","1/640"],
  ["cojera","cojea","artrosis","crepitacion","articula","gabapentina","previcox","daxocox","meloxicam","condroprotector","rodilla","cadera"],
