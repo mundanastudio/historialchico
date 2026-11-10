@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Plan de pruebas</title>
+<style>
+:root{
+  --bg:#f5f7f6; --card:#ffffff; --ink:#1c2422; --muted:#5f6b68; --line:#e2e8e6;
+  --accent:#0f766e; --accent-soft:#e0f2ef; --warn:#b45309; --warn-soft:#fef3e2;
+  --stop:#b91c1c; --stop-soft:#fdecec; --ok:#15803d; --ok-soft:#e7f6ec;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#111615; --card:#1a2120; --ink:#e7eeec; --muted:#9aa8a5; --line:#2b3533;
+    --accent:#2dd4bf; --accent-soft:#123632; --warn:#fbbf24; --warn-soft:#3a2d12;
+    --stop:#f87171; --stop-soft:#3b1818; --ok:#4ade80; --ok-soft:#14321f;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+.wrap{max-width:680px;margin:0 auto;padding:20px 16px 48px}
+header h1{font-size:1.5rem;margin:0 0 4px}
+header p{margin:0;color:var(--muted);font-size:.95rem}
+.now{margin:18px 0;padding:16px;border-radius:14px;background:var(--accent-soft);border:1px solid var(--line)}
+.now .tag{font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.now h2{margin:4px 0 6px;font-size:1.2rem}
+.now p{margin:0;color:var(--ink)}
+.now .next{margin-top:10px;font-size:.9rem;color:var(--muted)}
+.now .next b{color:var(--ink)}
+.now.stop{background:var(--stop-soft)} .now.stop .tag{color:var(--stop)}
+.now.warn{background:var(--warn-soft)} .now.warn .tag{color:var(--warn)}
+.tabs{display:flex;gap:8px;overflow-x:auto;padding:4px 0 10px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--ink);
+  padding:8px 14px;border-radius:999px;font:inherit;font-size:.9rem;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg);font-weight:600}
+.tabs button .today{display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor;margin-left:6px;vertical-align:middle}
+.panel{display:none}
+.panel.active{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px}
+.card h3{margin:0 0 10px;font-size:1.05rem}
+.card h4{margin:14px 0 6px;font-size:.95rem}
+.lead{color:var(--muted);margin:0 0 12px;font-size:.95rem}
+ul.check{list-style:none;margin:0;padding:0}
+ul.check li{border-top:1px solid var(--line)}
+ul.check li:first-child{border-top:0}
+ul.check label{display:flex;gap:12px;align-items:flex-start;padding:10px 0;cursor:pointer}
+ul.check input{width:22px;height:22px;margin:1px 0 0;flex:0 0 auto;accent-color:var(--accent)}
+ul.check input:checked + span{color:var(--muted);text-decoration:line-through}
+.time{display:inline-block;min-width:3.2em;font-weight:700;color:var(--accent);font-variant-numeric:tabular-nums}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.cols{grid-template-columns:1fr}}
+.box{border-radius:10px;padding:12px}
+.box.yes{background:var(--ok-soft)} .box.no{background:var(--stop-soft)}
+.box h4{margin:0 0 6px}
+.box.yes h4{color:var(--ok)} .box.no h4{color:var(--stop)}
+.box ul{margin:0;padding-left:18px}
+.box li{margin:3px 0;font-size:.93rem}
+.alert{border-left:4px solid var(--stop);background:var(--stop-soft);padding:10px 12px;border-radius:8px;margin:10px 0;font-size:.95rem}
+.tip{border-left:4px solid var(--warn);background:var(--warn-soft);padding:10px 12px;border-radius:8px;margin:10px 0;font-size:.95rem}
+footer{margin-top:24px;color:var(--muted);font-size:.82rem}
+footer button{background:none;border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:6px 10px;font:inherit;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Plan de pruebas · lunes 16 nov</h1>
+    <p>Colonoscopia 12:30 · Gastroscopia 13:15 · Hospital Fundación Alcorcón</p>
+  </header>
+
+  <section class="now" id="now" aria-live="polite">
+    <div class="tag" id="nowTag">Ahora</div>
+    <h2 id="nowTitle">…</h2>
+    <p id="nowText"></p>
+    <div class="next" id="nowNext"></div>
+  </section>
+
+  <nav class="tabs" role="tablist" id="tabs"></nav>
+
+  <!-- PREPARATIVOS -->
+  <section class="panel" id="p-prep" data-start="2026-11-10" data-end="2026-11-12">
+    <div class="card">
+      <h3>Compra</h3>
+      <ul class="check">
+        <li><label><input type="checkbox" data-id="buy-citra"><span>Tengo los <b>2 sobres de Citrafleet</b></span></label></li>
+        <li><label><input type="checkbox" data-id="buy-prot"><span>Pollo, pavo y pescado blanco</span></label></li>
+        <li><label><input type="checkbox" data-id="buy-carb"><span>Arroz y pasta blancos, pan blanco, galletas no integrales, patatas</span></label></li>
+        <li><label><input type="checkbox" data-id="buy-huevo"><span>Huevos y leche desnatada</span></label></li>
+        <li><label><input type="checkbox" data-id="buy-liq"><span>Caldo de pollo preparado (para diluir), zumo de manzana, Aquarius, agua sin gas</span></label></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Organización</h3>
+      <ul class="check">
+        <li><label><input type="checkbox" data-id="prep-acomp"><span>Tengo un <b>adulto que me acompañe</b> el lunes (con sedación no puedes conducir ni volver solo)</span></label></li>
+        <li><label><input type="checkbox" data-id="prep-confirm"><span>Pásate por la unidad (lunes a viernes) para <b>confirmar el horario de los sobres</b></span></label></li>
+        <li><label><input type="checkbox" data-id="prep-docs"><span>Tengo localizados el <b>consentimiento informado</b> y el <b>volante</b></span></label></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- VIERNES -->
+  <section class="panel" id="p-vie" data-start="2026-11-13" data-end="2026-11-13">
+    <div class="card">
+      <h3>Dieta sin residuos · día 1 de 2</h3>
+      <p class="lead">Solo lo que está en la lista verde. Aliña únicamente con un poco de aceite, sal y limón.</p>
+      <ul class="check">
+        <li><label><input type="checkbox" data-id="vie-agua"><span>Beber al menos <b>2 litros de agua</b></span></label></li>
+        <li><label><input type="checkbox" data-id="vie-des"><span>Desayuno de la lista</span></label></li>
+        <li><label><input type="checkbox" data-id="vie-com"><span>Comida de la lista</span></label></li>
+        <li><label><input type="checkbox" data-id="vie-cen"><span>Cena de la lista</span></label></li>
+      </ul>
+    </div>
+    <div class="card diet"></div>
+  </section>
+
+  <!-- SÁBADO -->
+  <section class="panel" id="p-sab" data-start="2026-11-14" data-end="2026-11-14">
+    <div class="card">
+      <h3>Dieta sin residuos · día 2 de 2</h3>
+      <p class="lead">Último día con comida sólida. Mañana, solo líquidos.</p>
+      <ul class="check">
+        <li><label><input type="checkbox" data-id="sab-agua"><span>Beber al menos <b>2 litros de agua</b></span></label></li>
+        <li><label><input type="checkbox" data-id="sab-des"><span>Desayuno de la lista</span></label></li>
+        <li><label><input type="checkbox" data-id="sab-com"><span>Comida de la lista</span></label></li>
+        <li><label><input type="checkbox" data-id="sab-cen"><span>Cena de la lista</span></label></li>
+        <li><label><input type="checkbox" data-id="sab-liq"><span>Preparar los líquidos del domingo: caldo colado, zumo, Aquarius</span></label></li>
+        <li><label><input type="checkbox" data-id="sab-alarm"><span>Poner alarmas: <b>dom 21:00</b> y <b>lun 2:30</b></span></label></li>
+      </ul>
+    </div>
+    <div class="card diet"></div>
+  </section>
+
+  <!-- DOMINGO -->
+  <section class="panel" id="p-dom" data-start="2026-11-15" data-end="2026-11-15">
+    <div class="card">
+      <h3>Solo líquidos claros, todo el día</h3>
+      <div class="alert"><b>Nada de leche</b> ni derivados, ni siquiera desnatados. Nada sólido.</div>
+      <div class="cols">
+        <div class="box yes"><h4>Sí</h4><ul>
+          <li>Agua</li><li>Caldo filtrado sin verdura</li><li>Zumo de manzana colado</li>
+          <li>Infusiones</li><li>Café con bastante agua</li><li>Aquarius / isotónicas</li>
+          <li>Bebidas sin gas (pueden llevar azúcar)</li></ul></div>
+        <div class="box no"><h4>No</h4><ul>
+          <li>Leche y derivados</li><li>Bebidas con gas</li><li>Alcohol</li><li>Cualquier sólido</li></ul></div>
+      </div>
+      <p class="lead" style="margin-top:12px">Ritmo: un vaso cada 15–30 minutos.</p>
+    </div>
+    <div class="card">
+      <h3>Noche · 1er sobre de Citrafleet</h3>
+      <ul class="check">
+        <li><label><input type="checkbox" data-id="dom-bolsa"><span>Dejar preparada la bolsa del lunes (consentimiento, volante, ropa cómoda)</span></label></li>
+        <li><label><input type="checkbox" data-id="dom-s1"><span><span class="time">21:00</span> Disuelve el sobre en un vaso de agua (200–250 ml) y bébelo</span></label></li>
+        <li><label><input type="checkbox" data-id="dom-l1"><span><span class="time">21:10</span> Bebe el 1er litro de líquidos claros (hasta las 22:10)</span></label></li>
+        <li><label><input type="checkbox" data-id="dom-l2"><span><span class="time">22:10</span> Bebe el 2º litro (hasta las 23:10)</span></label></li>
+        <li><label><input type="checkbox" data-id="dom-rest"><span><span class="time">23:10</span> Descanso. Alarma puesta a las 2:30</span></label></li>
+      </ul>
+      <div class="tip">Quédate cerca del baño.</div>
+    </div>
+  </section>
+
+  <!-- LUNES -->
+  <section class="panel" id="p-lun" data-start="2026-11-16" data-end="2026-11-16">
+    <div class="card">
+      <h3>Madrugada · 2º sobre de Citrafleet</h3>
+      <ul class="check">
+        <li><label><input type="checkbox" data-id="lun-s2"><span><span class="time">2:30</span> Disuelve el 2º sobre en un vaso de agua y bébelo</span></label></li>
+        <li><label><input type="checkbox" data-id="lun-l1"><span><span class="time">2:40</span> Bebe el 1er litro de líquidos claros (hasta las 3:30)</span></label></li>
+        <li><label><input type="checkbox" data-id="lun-l2"><span><span class="time">3:30</span> Bebe el 2º litro (hasta las 4:30)</span></label></li>
+      </ul>
+      <div class="alert"><b>Desde las 4:30: ayuno absoluto.</b> Nada de comida ni bebida, ni siquiera agua.</div>
+    </div>
+    <div class="card">
+      <h3>Antes de salir</h3>
+      <ul class="check">
+        <li><label><input type="checkbox" data-id="lun-consent"><span>Consentimiento informado</span></label></li>
+        <li><label><input type="checkbox" data-id="lun-volante"><span>Volante de la prueba</span></label></li>
+        <li><label><input type="checkbox" data-id="lun-metal"><span>Sin reloj, anillos, pulseras ni piercings</span></label></li>
+        <li><label><input type="checkbox" data-id="lun-ropa"><span>Ropa fácil de quitar</span></label></li>
+        <li><label><input type="checkbox" data-id="lun-acomp"><span>Voy con mi acompañante (no conduzco)</span></label></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>En el hospital</h3>
+      <ul class="check">
+        <li><label><input type="checkbox" data-id="lun-colono"><span><span class="time">12:30</span> Colonoscopia · Hospital de Día, planta baja (revisa el ticket)</span></label></li>
+        <li><label><input type="checkbox" data-id="lun-gastro"><span><span class="time">13:15</span> Gastroscopia</span></label></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- DESPUÉS -->
+  <section class="panel" id="p-desp" data-start="2026-11-17" data-end="2099-12-31">
+    <div class="card">
+      <h3>Después de las pruebas</h3>
+      <ul class="check">
+        <li><label><input type="checkbox" data-id="post-agua"><span>Bebe al menos <b>1 litro de agua</b> el resto del día</span></label></li>
+        <li><label><input type="checkbox" data-id="post-dieta"><span>Puedes volver a tu dieta habitual (salvo que te digan otra cosa)</span></label></li>
+      </ul>
+      <p class="lead" style="margin-top:12px">Es normal notar hinchazón 2–3 días y tardar unos días en hacer deposición. <b>No tomes laxantes.</b></p>
+      <div class="alert">Ve a <b>urgencias</b> si tienes dolor abdominal intenso, sangrado importante o fiebre.</div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Resumen de las hojas de preparación del hospital y de las explicaciones de la enfermera. Ante cualquier duda, manda lo que te diga la Unidad de Aparato Digestivo.</p>
+    <button type="button" id="reset">Desmarcar todas las casillas</button>
+  </footer>
+</div>
+
+<template id="dietTpl">
+  <h3>Qué puedo comer</h3>
+  <div class="cols">
+    <div class="box yes"><h4>Sí</h4><ul>
+      <li><b>Pollo y pavo a la plancha</b></li>
+      <li>Carne y pescado blanco a la plancha o hervidos</li>
+      <li>Arroz y pasta no integrales, sin salsas</li>
+      <li>Patatas sin piel, cocidas o en puré</li>
+      <li>Huevo en tortilla o cocido</li>
+      <li>Pan blanco o tostado, galletas no integrales</li>
+      <li>Leche y derivados desnatados</li>
+      <li>Caldo sin verdura colado, zumo de manzana colado</li>
+      <li>Café, té e infusiones ligeras (doble de agua)</li>
+      <li>Aquarius y bebidas sin gas</li>
+      <li>Aliño: aceite, sal y limón</li>
+    </ul></div>
+    <div class="box no"><h4>No</h4><ul>
+      <li>Fruta y verdura</li>
+      <li>Legumbres</li>
+      <li>Nada integral</li>
+      <li>Leche y derivados enteros</li>
+      <li>Carnes grasas y embutidos</li>
+      <li>Pescado azul (atún, salmón…)</li>
+      <li>Huevo frito o en salsa</li>
+      <li>Chocolate, pasteles, frutos secos</li>
+      <li>Bebidas con gas y alcohol</li>
+      <li>Salsas, especias, pimienta, perejil</li>
+    </ul></div>
+  </div>
+</template>
+
+<script>
+(function(){
+  var TZ = "+01:00";
+  function at(s){ return new Date(s + TZ); }
+
+  // Diet block in Fri/Sat
+  var tpl = document.getElementById("dietTpl");
+  document.querySelectorAll(".diet").forEach(function(el){ el.appendChild(tpl.content.cloneNode(true)); });
+
+  // Tabs
+  var tabsDef = [
+    ["prep","Mar 10 – Jue 12"],["vie","Vie 13"],["sab","Sáb 14"],
+    ["dom","Dom 15"],["lun","Lun 16"],["desp","Después"]
+  ];
+  var tabs = document.getElementById("tabs");
+  function todayKey(now){
+    var best = "prep";
+    tabsDef.forEach(function(t){
+      var p = document.getElementById("p-"+t[0]);
+      if (now >= at(p.dataset.start+"T00:00:00")) best = t[0];
+    });
+    return best;
+  }
+  function select(key){
+    tabs.querySelectorAll("button").forEach(function(b){ b.setAttribute("aria-selected", b.dataset.key===key ? "true":"false"); });
+    document.querySelectorAll(".panel").forEach(function(p){ p.classList.toggle("active", p.id==="p-"+key); });
+  }
+  var nowKey = todayKey(new Date());
+  tabsDef.forEach(function(t){
+    var b = document.createElement("button");
+    b.type = "button"; b.setAttribute("role","tab"); b.dataset.key = t[0];
+    b.textContent = t[1];
+    if (t[0]===nowKey){ var d=document.createElement("span"); d.className="today"; d.title="Hoy"; b.appendChild(d); }
+    b.addEventListener("click", function(){ select(t[0]); });
+    tabs.appendChild(b);
+  });
+  select(nowKey);
+
+  // Checkboxes (per-browser memory)
+  var KEY = "plan-pruebas-v1", state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ state = {}; }
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
+  document.querySelectorAll("input[data-id]").forEach(function(cb){
+    cb.checked = !!state[cb.dataset.id];
+    cb.addEventListener("change", function(){ state[cb.dataset.id] = cb.checked; save(); });
+  });
+  document.getElementById("reset").addEventListener("click", function(){
+    if (!confirm("¿Desmarcar todas las casillas?")) return;
+    state = {}; save();
+    document.querySelectorAll("input[data-id]").forEach(function(cb){ cb.checked=false; });
+  });
+
+  // "Ahora" card
+  var phases = [
+    {from:"2026-11-10T00:00:00", kind:"", title:"Preparativos", text:"Comida normal. Haz la compra, confirma el horario de los sobres y organiza el acompañante."},
+    {from:"2026-11-13T00:00:00", kind:"warn", title:"Dieta sin residuos", text:"Solo alimentos de la lista verde y al menos 2 litros de agua."},
+    {from:"2026-11-15T00:00:00", kind:"warn", title:"Solo líquidos claros", text:"Un vaso cada 15–30 minutos. Nada de leche ni sólidos."},
+    {from:"2026-11-15T21:00:00", kind:"warn", title:"1er sobre de Citrafleet", text:"Sobre en un vaso de agua. A los 10 minutos, 2 litros de líquidos claros en 2 horas."},
+    {from:"2026-11-15T23:10:00", kind:"", title:"Descanso", text:"Duerme. Alarma a las 2:30 para el segundo sobre."},
+    {from:"2026-11-16T02:30:00", kind:"warn", title:"2º sobre de Citrafleet", text:"Sobre en un vaso de agua. A los 10 minutos, 2 litros de líquidos claros. Termina a las 4:30."},
+    {from:"2026-11-16T04:30:00", kind:"stop", title:"Ayuno absoluto", text:"Nada de comida ni bebida, ni siquiera agua. Lleva consentimiento y volante, sin objetos metálicos, y ve acompañado."},
+    {from:"2026-11-16T12:30:00", kind:"", title:"Pruebas en curso", text:"Colonoscopia a las 12:30 y gastroscopia a las 13:15."},
+    {from:"2026-11-16T15:00:00", kind:"", title:"Después de las pruebas", text:"Bebe al menos 1 litro de agua. Dieta habitual. Urgencias si hay dolor intenso, sangrado o fiebre."}
+  ];
+  phases.forEach(function(p){ p.t = at(p.from); });
+
+  function fmt(ms){
+    var m = Math.round(ms/60000), d = Math.floor(m/1440), h = Math.floor((m%1440)/60), mm = m%60;
+    if (d>0) return d + " d " + h + " h";
+    if (h>0) return h + " h " + mm + " min";
+    return mm + " min";
+  }
+  function render(){
+    var now = new Date(), cur = phases[0], next = null;
+    for (var i=0;i<phases.length;i++){ if (now >= phases[i].t){ cur = phases[i]; next = phases[i+1]||null; } }
+    if (now < phases[0].t) next = phases[1];
+    var card = document.getElementById("now");
+    card.className = "now" + (cur.kind ? " "+cur.kind : "");
+    document.getElementById("nowTag").textContent = cur.kind==="stop" ? "Ahora · importante" : "Ahora";
+    document.getElementById("nowTitle").textContent = cur.title;
+    document.getElementById("nowText").textContent = cur.text;
+    var n = document.getElementById("nowNext");
+    if (next){
+      var hh = next.from.slice(11,16), day = {"13":"vie","14":"sáb","15":"dom","16":"lun"}[next.from.slice(8,10)] || "";
+      n.innerHTML = "Siguiente: <b>" + next.title + "</b> · " + day + " " + hh + " (en " + fmt(next.t - now) + ")";
+    } else { n.textContent = ""; }
+  }
+  render(); setInterval(render, 30000);
+})();
+</script>
+</body>
+</html>
